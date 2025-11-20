@@ -5,13 +5,10 @@ interface TodoItemProps {
   todo: Todo;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
-  onDragStart: (e: React.DragEvent, id: number) => void;
-  onDragEnd: () => void;
-  isDragging: boolean;
 }
 
 // Wrap component in React.memo
-const TodoItem: React.FC<TodoItemProps> = memo(({ todo, onToggle, onDelete, onDragStart, onDragEnd, isDragging }) => {
+const TodoItem: React.FC<TodoItemProps> = memo(({ todo, onToggle, onDelete }) => {
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     onDelete(todo.id);
@@ -31,18 +28,17 @@ const TodoItem: React.FC<TodoItemProps> = memo(({ todo, onToggle, onDelete, onDr
   };
 
   return (
-    <div
-      className={`todo-item ${todo.completed ? 'completed' : ''} ${isDragging ? 'dragging' : ''}`}
-      onClick={handleItemClick}
-      draggable
-      onDragStart={(e) => onDragStart(e, todo.id)}
-      onDragEnd={onDragEnd}
-    >
-      <div 
-        className="todo-checkbox"
-        onClick={handleCheckboxClick}
-      />
-      <span className="todo-text">{todo.text}</span>
+    <div className="todo-item-wrapper">
+      <div
+        className={`todo-item ${todo.completed ? 'completed' : ''}`}
+        onClick={handleItemClick}
+      >
+        <span className="todo-text">{todo.text}</span>
+        <div 
+          className="todo-checkbox"
+          onClick={handleCheckboxClick}
+        />
+      </div>
       <button className="delete-btn" onClick={handleDelete}>
         ×
       </button>

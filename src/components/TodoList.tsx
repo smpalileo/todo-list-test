@@ -6,32 +6,19 @@ interface TodoListProps {
   todos: Todo[];
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
-  onDragStart: (e: React.DragEvent, id: number) => void;
-  onDragEnd: () => void;
-  onDragOver: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent, targetId: number) => void;
-  draggingId: number | null;
 }
 
 // Wrap component in React.memo
-const TodoList: React.FC<TodoListProps> = memo(({ todos, onToggle, onDelete, onDragStart, onDragEnd, onDragOver, onDrop, draggingId }) => {
+const TodoList: React.FC<TodoListProps> = memo(({ todos, onToggle, onDelete }) => {
   return (
     <div className="todo-list">
       {todos.map(todo => (
-        <div
+        <TodoItem
           key={todo.id}
-          onDragOver={onDragOver}
-          onDrop={(e) => onDrop(e, todo.id)}
-        >
-          <TodoItem
-            todo={todo}
-            onToggle={onToggle}
-            onDelete={onDelete}
-            onDragStart={onDragStart}
-            onDragEnd={onDragEnd}
-            isDragging={draggingId === todo.id}
-          />
-        </div>
+          todo={todo}
+          onToggle={onToggle}
+          onDelete={onDelete}
+        />
       ))}
     </div>
   );

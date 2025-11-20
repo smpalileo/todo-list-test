@@ -56,32 +56,31 @@
   gap: 8px;
 }
 
+.todo-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .todo-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  padding: 16px;
+  padding: 17.6px; /* 16px * 1.1 = 17.6px (10% increase) */
   background-color: #fff;
   border: 2px solid #3a5a7a;
   border-radius: 12px;
-  cursor: grab;
+  cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.todo-item:active {
-  cursor: grabbing;
+  flex: 1;
 }
 
 .todo-item:hover {
   background-color: #f8f9fa;
   border-color: #5a7a9a;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.todo-item.dragging {
-  opacity: 0.5;
-  cursor: grabbing;
 }
 
 .todo-item.completed {
@@ -131,7 +130,7 @@
   font-weight: bold;
 }
 
-/* 1. Make the delete button invisible by default */
+/* Delete button positioned outside the container */
 .delete-btn {
   background-color: #ff4d4d;
   color: white;
@@ -155,8 +154,8 @@
   background-color: #ff3333;
 }
 
-/* 2. When you hover over the ENTIRE todo-item, make the delete button visible */
-.todo-item:hover .delete-btn {
+/* When you hover over the wrapper, make the delete button visible */
+.todo-item-wrapper:hover .delete-btn {
   visibility: visible; /* Show it on hover */
   opacity: 1; /* Fade in */
 }
