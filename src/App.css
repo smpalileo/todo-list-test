@@ -11,7 +11,7 @@
 
 .header h1 {
   margin: 0;
-  color: #333;
+  color: #fff;
 }
 
 .add-input-form {
@@ -22,20 +22,28 @@
 
 .add-input-form input {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px;
+  border: 2px solid #3a5a7a;
+  border-radius: 8px;
   font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+.add-input-form input:focus {
+  outline: none;
+  border-color: #5a7a9a;
 }
 
 .add-input-form button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
 }
 
 .add-input-form button:hover {
@@ -45,29 +53,82 @@
 .todo-list {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .todo-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  gap: 12px;
+  padding: 16px;
+  background-color: #fff;
+  border: 2px solid #3a5a7a;
+  border-radius: 12px;
+  cursor: grab;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item:active {
+  cursor: grabbing;
 }
 
 .todo-item:hover {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
+  border-color: #5a7a9a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.todo-item.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
 }
 
 .todo-item.completed {
   opacity: 0.6;
-  text-decoration: line-through;
+  background-color: #e9ecef;
+  border-color: #adb5bd;
 }
 
-.todo-item span {
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.todo-item .todo-text {
   flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.todo-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #3a5a7a;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  background-color: #fff;
+}
+
+.todo-item:hover .todo-checkbox {
+  border-color: #5a7a9a;
+}
+
+.todo-item.completed .todo-checkbox {
+  background-color: #3a5a7a;
+  border-color: #3a5a7a;
+}
+
+.todo-item.completed .todo-checkbox::after {
+  content: '✓';
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 /* 1. Make the delete button invisible by default */
@@ -76,12 +137,22 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   visibility: hidden; /* Hide it initially */
   opacity: 0; /* Fade out */
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; /* Smooth transition */
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background-color: #ff3333;
 }
 
 /* 2. When you hover over the ENTIRE todo-item, make the delete button visible */
